@@ -10,6 +10,8 @@ import SwiftUI
 struct HomeView: View {
     @AppStorage("onboarding") var isOnboardingViewActive: Bool = false
     @State private var isAnimating: Bool = false
+
+    let hapticFeedback = UINotificationFeedbackGenerator()
     
     var body: some View {
         VStack(spacing: 20) {
@@ -44,6 +46,8 @@ struct HomeView: View {
             Spacer()
             
             Button(action: {
+                hapticFeedback.notificationOccurred(.success)
+                playSound(sound: "success", type: "m4a")
                 isOnboardingViewActive = true
             }) {
                 Image(systemName: "arrow.triangle.2.circlepath.circle.fill")
